@@ -5,16 +5,15 @@ import "./styles/score-board.css";
 // const incorrectCount = 0;
 // const correctCount = 0;
 
-
 export function FunctionalScoreBoard({
   correctCount,
   incorrectCount,
-  answers,}: 
-  { correctCount: number,
-    incorrectCount: number,
-    answers: string[];
+  answers,
+}: {
+  correctCount: number;
+  incorrectCount: number;
+  answers: string[];
 }) {
-
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {incorrectCount}</div>
