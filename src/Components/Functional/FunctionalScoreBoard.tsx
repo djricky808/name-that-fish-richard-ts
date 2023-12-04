@@ -9,16 +9,18 @@ export function FunctionalScoreBoard({
   correctCount,
   incorrectCount,
   answers,
+  fishCount,
 }: {
   correctCount: number;
   incorrectCount: number;
   answers: string[];
+  fishCount: number;
 }) {
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {incorrectCount}</div>
       <div id="choices-left">
-        {answers.map((answer) => (
+        {answers.slice(fishCount).map((answer) => (
           <div key={answer} className="choice">
             {answer}
           </div>

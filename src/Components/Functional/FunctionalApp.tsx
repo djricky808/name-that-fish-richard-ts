@@ -6,43 +6,40 @@ import { useState } from "react";
 export type TFishInformation = {
   namedFish: string;
 };
+const initialFishes = ["trout", "salmon", "tuna", "shark"];
 
 export function FunctionalApp() {
-  const answersLeft = ["trout", "salmon", "tuna", "shark"];
-
-  const [fishCount, setFishCount] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
-  const [answers, setAnswers] = useState(answersLeft);
+
+  const fishCount = correctCount + incorrectCount;
 
   const checkAnswer = (guessedFish: string) => {
-    if (guessedFish && guessedFish == answers[0]) {
+    if (guessedFish && guessedFish == initialFishes[fishCount]) {
       setCorrectCount(correctCount + 1);
     } else {
       setIncorrectCount(incorrectCount + 1);
-    }
-    if (answers.length !== 0) {
-      setAnswers(answers.slice(1));
     }
   };
 
   return (
     <>
-      {answers.length !== 0 && (
+      {initialFishes.length !== fishCount && (
         <FunctionalScoreBoard
           correctCount={correctCount}
           incorrectCount={incorrectCount}
-          answers={answers}
+          answers={initialFishes}
+          fishCount={fishCount}
         />
       )}
-      <FunctionalGameBoard
-        fishCount={fishCount}
-        setFishCount={setFishCount}
-        checkAnswer={checkAnswer}
-        answers={answers}
-      />
-      {answers.length === 0 && (
-        <FunctionalFinalScore correctCount={correctCount} />
+      {initialFishes.length !== fishCount && (
+        <FunctionalGameBoard fishCount={fishCount} checkAnswer={checkAnswer} />
+      )}
+      {fishCount === initialFishes.length && (
+        <FunctionalFinalScore
+          correctCount={correctCount}
+          initialFishCount={initialFishes.length}
+        />
       )}
     </>
   );

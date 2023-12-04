@@ -1,8 +1,9 @@
 import { Component } from "react";
 
-const totalCount = 4;
-
-export class ClassFinalScore extends Component<{ correctCount: number }> {
+export class ClassFinalScore extends Component<{
+  correctCount: number;
+  initialFishCount: number;
+}> {
   render() {
     return (
       <div id="final-score">
@@ -10,7 +11,7 @@ export class ClassFinalScore extends Component<{ correctCount: number }> {
         <div id="score">
           <p>{this.props.correctCount}</p>
           <hr />
-          <p>{totalCount}</p>
+          <p>{this.props.initialFishCount}</p>
         </div>
       </div>
     );

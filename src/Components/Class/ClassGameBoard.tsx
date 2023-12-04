@@ -23,46 +23,42 @@ const initialFishes = [
 
 export class ClassGameBoard extends Component<{
   checkAnswer: (fishInput: string) => void;
-  answers: string[];
+  fishCount: number;
 }> {
   state = {
     fishInput: "",
-    fishCount: 0,
   };
 
   render() {
-    const { fishCount, fishInput } = this.state;
+    const { fishInput } = this.state;
 
-    const nextFishToName = initialFishes[fishCount];
+    const nextFishToName = initialFishes[this.props.fishCount];
 
-    if (this.props.answers.length !== 0) {
-      return (
-        <div id="game-board">
-          <div id="fish-container">
-            <img src={nextFishToName.url} alt={nextFishToName.name} />
-          </div>
-          <form
-            id="fish-guess-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              this.props.checkAnswer(fishInput);
-              this.setState({ fishInput: "" });
-              this.setState({ fishCount: fishCount + 1 });
-            }}
-          >
-            <label htmlFor="fish-guess">What kind of fish is this?</label>
-            <input
-              type="text"
-              name="fish-guess"
-              onChange={(e) => {
-                this.setState({ fishInput: e.target.value });
-              }}
-              value={fishInput}
-            />
-            <input type="submit" />
-          </form>
+    return (
+      <div id="game-board">
+        <div id="fish-container">
+          <img src={nextFishToName.url} alt={nextFishToName.name} />
         </div>
-      );
-    }
+        <form
+          id="fish-guess-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.props.checkAnswer(fishInput);
+            this.setState({ fishInput: "" });
+          }}
+        >
+          <label htmlFor="fish-guess">What kind of fish is this?</label>
+          <input
+            type="text"
+            name="fish-guess"
+            onChange={(e) => {
+              this.setState({ fishInput: e.target.value });
+            }}
+            value={fishInput}
+          />
+          <input type="submit" />
+        </form>
+      </div>
+    );
   }
 }
